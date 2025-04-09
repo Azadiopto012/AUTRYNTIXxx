@@ -225,34 +225,29 @@ const MCPPage: React.FC = () => {
     <div className="max-w-7xl mx-auto">
       <Header title="MCP Library" wallet={wallet} />
       
-      {/* Search and Filter */}
+      {/* Filter Options */}
       <div className="mb-8">
         <div className="flex flex-col gap-4">
-          {/* Search input */}
-          <div className="relative flex-grow">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search MCP servers, tools, or keywords..."
-              className="w-full px-4 py-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-          
-          {/* Filter options - styled like the reference image */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
+          {/* Filter options */}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
             {filterTypes.map((filter) => (
               <button
                 key={filter.id}
-                className={`px-3 py-2 flex justify-between items-center border-4 rounded-md transition-colors ${
+                className={`px-3 py-3 flex justify-between items-center border-4 rounded-md transition-colors ${
                   selectedType === filter.id 
-                    ? 'border-purple-600 bg-purple-50' 
-                    : 'border-gray-300 bg-white hover:bg-gray-50'
+                    ? 'border-black bg-brutalism-purple text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
+                    : 'border-gray-300 bg-white hover:bg-gray-50 hover:border-gray-400'
                 }`}
                 onClick={() => setSelectedType(filter.id)}
               >
-                <span className="font-mono font-bold">{filter.label}</span>
-                <span className="ml-2 bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs">
+                <span className={`font-mono font-semibold text-base ${
+                  selectedType === filter.id ? 'text-white' : 'text-[#888888]'
+                }`}>{filter.label}</span>
+                <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+                  selectedType === filter.id 
+                    ? 'bg-white text-brutalism-purple' 
+                    : 'bg-gray-200 text-gray-800'
+                }`}>
                   {filter.count}
                 </span>
               </button>

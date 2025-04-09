@@ -391,7 +391,7 @@ const TokenCreator: React.FC = () => {
                         className="hidden"
                       />
                       <label htmlFor="tokenImage">
-                        <BrutalistButton color="default" type="button" className="mb-2" asChild>
+                        <BrutalistButton color="default" type="button" className="mb-2">
                           <span><i className="ri-upload-line mr-2"></i> Upload Image</span>
                         </BrutalistButton>
                       </label>
@@ -650,8 +650,9 @@ const TokenCreator: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
-                  <label className="font-mono text-sm mb-1 block">Network*</label>
+                  <label htmlFor="network" className="font-mono text-sm mb-1 block">Network*</label>
                   <select
+                    id="network"
                     name="network"
                     value={formData.network}
                     onChange={handleChange}

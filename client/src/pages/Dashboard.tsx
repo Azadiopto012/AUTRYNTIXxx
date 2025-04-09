@@ -1,58 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import OverviewCard from "@/components/dashboard/OverviewCard";
-import PerformanceChart from "@/components/dashboard/PerformanceChart";
 import { useWallet } from "@/lib/walletAdapter";
 import { useLocation } from "wouter";
-import { subscribeTradingState, getTradingState } from "@/lib/tradingState";
+import { getTokenCount, getMCPCount, getLLMCount } from "@/lib/dashboardMetrics";
 import { formatCurrency, formatPercentage } from "@/lib/utils";
 
 const Dashboard: React.FC = () => {
   const { wallet } = useWallet();
   const [location, setLocation] = useLocation();
-  const [tradingPerformance, setTradingPerformance] = useState({
-    portfolioValue: "$0",
-    change: "0%",
-    description: "Connect wallet to start trading",
-    activeBots: 0,
+  const [metrics, setMetrics] = useState({
+    tokenCount: 0,
+    mcpCount: 0,
+    llmCount: 0,
   });
 
-  // Subscribe to trading state changes
+  // Load metrics on component mount
   useEffect(() => {
-    // Initialize with current state in case there's already data
-    const currentState = getTradingState();
-    if (
-      currentState.currentValue > 0 &&
-      currentState.currentValue !== currentState.startingCapital
-    ) {
-      updateDashboardState(currentState);
-    }
-
-    // Subscribe to future updates
-    const unsubscribe = subscribeTradingState((state) => {
-      updateDashboardState(state);
+    setMetrics({
+      tokenCount: getTokenCount(),
+      mcpCount: getMCPCount(),
+      llmCount: getLLMCount(),
     });
-
-    return unsubscribe;
   }, []);
-
-  // Helper function to update dashboard
-  const updateDashboardState = (state: any) => {
-    // Always update with trading state
-    const portfolioValue = formatCurrency(state.currentValue);
-    const change = formatPercentage(state.profitLossPercentage);
-    const description = state.isActive
-      ? "Trading in progress"
-      : `Profit/Loss: ${state.profitLoss >= 0 ? "+" : ""}${formatCurrency(state.profitLoss)}`;
-    const activeBots = state.isActive ? 1 : 0;
-
-    setTradingPerformance({
-      portfolioValue,
-      change: state.profitLossPercentage >= 0 ? `+${change}` : change,
-      description,
-      activeBots,
-    });
-  };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -61,44 +31,42 @@ const Dashboard: React.FC = () => {
       {/* Dashboard Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <OverviewCard
-          title="Portfolio Value"
-          value={tradingPerformance.portfolioValue}
-          change={tradingPerformance.change}
-          description={tradingPerformance.description}
-          icon="ri-bar-chart-line"
-          iconColor="bg-brutalism-blue"
-        />
-
-        <OverviewCard
-          title="Active Bots"
-          value={String(tradingPerformance.activeBots)}
-          icon="ri-robot-line"
+          title="Tokens Created"
+          value={String(metrics.tokenCount)}
+          description={wallet ? "Create more tokens in the Token Creator" : "Connect wallet to create tokens"}
+          icon="ri-coin-line"
           iconColor="bg-brutalism-yellow"
           action={{
-            label:
-              tradingPerformance.activeBots > 0
-                ? "Manage Bots"
-                : "Start Trading Bot",
-            onClick: () => setLocation("/auto-trading"),
+            label: "Create New Token",
+            onClick: () => setLocation("/token-creator"),
           }}
         />
 
         <OverviewCard
-          title="AI Agents"
-          value="0"
-          icon="ri-brain-line"
+          title="Total MCP"
+          value={String(metrics.mcpCount)}
+          description="Model Context Protocol integrations"
+          icon="ri-cpu-line"
           iconColor="bg-brutalism-purple"
           action={{
-            label: "Create New Agent",
-            onClick: () => setLocation("/ai-agent-builder"),
+            label: "View MCP Library",
+            onClick: () => setLocation("/mcp"),
             color: "purple",
           }}
         />
-      </div>
 
-      {/* Main Dashboard Content */}
-      <div className="mb-8">
-        <PerformanceChart title="Performance Overview" />
+        <OverviewCard
+          title="LLM Library"
+          value={String(metrics.llmCount)}
+          icon="ri-ai-generate"
+          iconColor="bg-brutalism-blue"
+          description="Explore the LLM library collection"
+          action={{
+            label: "Browse LLMs",
+            onClick: () => setLocation("/llm"),
+            color: "blue",
+          }}
+        />
       </div>
 
       {/* Recent Activity */}
@@ -109,11 +77,11 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center justify-between border-b border-gray-700 pb-3">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-lg bg-brutalism-green flex items-center justify-center mr-4 border-2 border-black">
-                  <i className="ri-robot-line text-white"></i>
+                  <i className="ri-token-line text-white"></i>
                 </div>
                 <div>
-                  <p className="font-bold">Trading Bot Started</p>
-                  <p className="text-sm text-gray-400">Medium Risk Strategy</p>
+                  <p className="font-bold">Token Created</p>
+                  <p className="text-sm text-gray-400">SOLX Token</p>
                 </div>
               </div>
               <p className="text-sm text-gray-400">10 minutes ago</p>

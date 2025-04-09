@@ -32,10 +32,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       color: "bg-brutalism-red",
     },
     {
-      path: "/auto-trading",
-      name: "Auto Trading",
+      path: "/solana-gpt",
+      name: "SolanaGPT",
       icon: "ri-robot-line",
-      color: "bg-brutalism-blue",
+      color: "bg-brutalism-green",
+      badge: "NEW",
     },
     {
       path: "/ai-agent-builder",
@@ -49,18 +50,6 @@ const Sidebar: React.FC<SidebarProps> = ({
       name: "Token Creator",
       icon: "ri-coin-line",
       color: "bg-brutalism-yellow",
-    },
-    {
-      path: "/staking",
-      name: "Staking",
-      icon: "ri-stack-line",
-      color: "bg-brutalism-green",
-    },
-    {
-      path: "/lending",
-      name: "Lending",
-      icon: "ri-funds-line",
-      color: "bg-indigo-500",
     },
     {
       path: "/llm",

@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrutalistInput } from '../ui/brutalist-input';
 import { formatWalletAddress } from '@/lib/utils';
 import { ConnectedWallet } from '@/lib/walletAdapter';
 
@@ -31,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({
         <button
           onClick={onMobileMenuToggle}
           className="mr-4 md:hidden"
+          aria-label="Toggle mobile menu"
         >
           <i className="ri-menu-line text-2xl"></i>
         </button>
@@ -42,17 +42,6 @@ const Header: React.FC<HeaderProps> = ({
       </div>
       
       <div className="flex space-x-4 items-center">
-        <div className="relative search-container">
-          <BrutalistInput
-            type="text"
-            placeholder="Search..."
-            className="pr-10"
-          />
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center">
-            <i className="ri-search-line text-gray-400"></i>
-          </div>
-        </div>
-        
         {wallet && isMobile && (
           <div className="hidden md:flex items-center">
             <div className="py-1 px-3 bg-brutalism-blue bg-opacity-20 rounded-full">

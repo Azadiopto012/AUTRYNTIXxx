@@ -6,13 +6,11 @@ import WalletConnectModal from "@/components/wallet/WalletConnectModal";
 import { useWallet, supportedWallets } from "@/lib/walletAdapter";
 import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/Dashboard";
-import AutoTrading from "@/pages/AutoTrading";
 import AIAgentBuilder from "@/pages/AIAgentBuilder";
 import TokenCreator from "@/pages/TokenCreator";
-import Staking from "@/pages/Staking";
-import Lending from "@/pages/Lending";
 import LLMPage from "@/pages/LLMPage";
 import MCPPage from "@/pages/MCPPage";
+import SolanaGPT from "@/pages/SolanaGPT";
 
 function App() {
   const { wallet, connect, disconnect, isConnecting, error } = useWallet();
@@ -71,6 +69,7 @@ function App() {
         <button
           className="fixed left-4 top-4 z-30 bg-brutalism-blue p-2 rounded-md"
           onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
         >
           <i className="ri-menu-line text-white text-xl"></i>
         </button>
@@ -90,13 +89,11 @@ function App() {
       <main className={`flex-1 p-8 ${isMobile ? 'ml-0' : 'ml-64'}`}>
         <Switch>
           <Route path="/" component={Dashboard} />
-          <Route path="/auto-trading" component={AutoTrading} />
           <Route path="/ai-agent-builder" component={AIAgentBuilder} />
           <Route path="/token-creator" component={TokenCreator} />
-          <Route path="/staking" component={Staking} />
-          <Route path="/lending" component={Lending} />
           <Route path="/llm" component={LLMPage} />
           <Route path="/mcp" component={MCPPage} />
+          <Route path="/solana-gpt" component={SolanaGPT} />
           <Route component={NotFound} />
         </Switch>
       </main>

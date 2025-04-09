@@ -355,83 +355,52 @@ const LLMPage: React.FC = () => {
     <div className="max-w-7xl mx-auto">
       <Header title="LLM Library" wallet={wallet} />
       
-      {/* Hero Section */}
-      <div className="brutalist-card p-8 mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-4 border-black">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-4xl font-mono font-bold mb-4">Awesome LLM Collection</h1>
-            <p className="text-lg mb-6">
-              A comprehensive library of Large Language Models, tools, and resources for AI developers and researchers.
-              Based on the <a href="https://github.com/Hannibal046/Awesome-LLM" target="_blank" rel="noopener noreferrer" className="underline">Awesome-LLM</a> GitHub repository.
-            </p>
-          </div>
-          <div className="hidden md:flex justify-center">
-            <div className="w-48 h-48 border-4 border-white rounded-full flex items-center justify-center bg-white bg-opacity-20">
-              <span className="text-6xl font-bold">LLM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Search and Filter */}
-      <div className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative flex-grow">
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-500" />
-            </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search models, tools, or keywords..."
-              className="w-full pl-10 pr-4 py-3 border-4 border-black focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 font-bold rounded-md border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
-                  selectedCategory === category 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-white text-gray-800'
-                }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+      {/* Category Filter */}
+      <div className="mb-10">
+        <div className="flex flex-wrap gap-3">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-3 font-bold rounded-md border-4 transition-transform hover:translate-y-[2px] ${
+                selectedCategory === category 
+                  ? 'bg-brutalism-purple text-white border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
+                  : 'bg-white text-gray-800 border-gray-300 hover:border-gray-400 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]'
+              }`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
         </div>
       </div>
       
       {/* Content */}
       {Object.keys(groupedData).length > 0 ? (
         Object.entries(groupedData).map(([category, items]) => (
-          <div key={category} className="mb-12">
-            <h2 className="text-2xl font-mono font-bold mb-6 border-b-4 border-black pb-2">{category}</h2>
+          <div key={category} className="mb-16">
+            <h2 className="text-2xl font-mono font-bold mb-8 border-b-4 border-black pb-3">{category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((item) => (
                 <BrutalistCard key={item.name} className="p-6 border-4 border-black h-full flex flex-col">
-                  <div className="flex justify-between items-start mb-3">
+                  <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold">{item.name}</h3>
                     <a 
                       href={item.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+                      className="p-2 bg-gray-100 rounded-full hover:bg-brutalism-purple hover:text-white transition-colors"
+                      aria-label={`Visit ${item.name} website`}
                     >
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
-                  <p className="text-gray-600 flex-grow">{item.description}</p>
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="text-[#f2f2f2] text-base flex-grow font-medium bg-gray-900 p-3 rounded-md">{item.description}</p>
+                  <div className="mt-5 pt-4 border-t border-gray-200">
                     <a 
                       href={item.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-purple-600 hover:underline text-sm flex items-center"
+                      className="text-brutalism-purple hover:underline text-sm flex items-center font-medium"
                     >
                       <span>{item.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}</span>
                     </a>
