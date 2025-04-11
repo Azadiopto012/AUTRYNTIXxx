@@ -980,30 +980,30 @@ const MCPPage: React.FC = () => {
           </button>
         </ComingSoonTooltip>
         
-        <input
-          type="text"
+            <input
+              type="text"
           placeholder="Search MCP servers..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
           className="flex-grow px-4 py-2 rounded-lg border-4 border-gray-300 focus:border-brutalism-purple 
                    focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]"
-        />
-      </div>
-      
+            />
+          </div>
+          
       {/* Filter Options */}
       <div className="mb-8">
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
             {filterTypes.map((filter) => (
               <ComingSoonTooltip key={filter.id}>
-                <button
+              <button
                   className={`px-3 py-3 flex justify-between items-center border-4 rounded-md transition-colors ${
-                    selectedType === filter.id 
+                  selectedType === filter.id 
                       ? 'border-black bg-brutalism-purple text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
                       : 'border-gray-300 bg-white hover:bg-gray-50 hover:border-gray-400'
-                  }`}
-                  onClick={() => setSelectedType(filter.id)}
-                >
+                }`}
+                onClick={() => setSelectedType(filter.id)}
+              >
                   <span className={`font-mono font-semibold text-base ${
                     selectedType === filter.id ? 'text-white' : 'text-[#888888]'
                   }`}>{filter.label}</span>
@@ -1012,9 +1012,9 @@ const MCPPage: React.FC = () => {
                       ? 'bg-white text-brutalism-purple' 
                       : 'bg-gray-200 text-gray-800'
                   }`}>
-                    {filter.count}
-                  </span>
-                </button>
+                  {filter.count}
+                </span>
+              </button>
               </ComingSoonTooltip>
             ))}
           </div>
@@ -1085,7 +1085,7 @@ const MCPPage: React.FC = () => {
                           </a>
                         </ComingSoonTooltip>
                       )}
-                    </div>
+                      </div>
                     {item.baseUrl && (
                       <div className="mt-2 text-xs text-gray-500">
                         Base URL: {item.baseUrl}

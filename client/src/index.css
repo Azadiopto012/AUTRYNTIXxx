@@ -1,3 +1,6 @@
+/* Import Anton font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,10 +8,23 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: 'Anton', sans-serif;
   }
 
   body {
-    @apply bg-[#121212] text-white font-mono antialiased;
+    @apply bg-[#121212] text-white antialiased;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.03em;
+  }
+
+  button, a {
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.02em;
   }
 
   ::-webkit-scrollbar {
@@ -119,6 +135,7 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     transform-origin: center;
     will-change: transform;
+    -webkit-user-select: none;
     user-select: none;
   }
   
