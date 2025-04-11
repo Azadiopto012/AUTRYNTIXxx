@@ -15,7 +15,7 @@ export const getTokenCount = (): number => {
 
 // Get MCP count from the MCP data
 export const getMCPCount = (): number => {
-  return 13; // Hardcoded total from MCPPage
+  return 68; // Updated total from MCPPage
 };
 
 // Get LLM library count from the LLM data
